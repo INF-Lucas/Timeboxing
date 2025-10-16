@@ -81,8 +81,7 @@ function SettingsPageContent() {
   }
 
   return (
-    <>
-      <div>
+    <div>
       {toast ? (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 bg-purple-800 text-white text-xs rounded-full px-3 py-2 shadow">
           {toast}
@@ -207,6 +206,6 @@ function SettingsPageContent() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
