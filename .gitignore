@@ -20,6 +20,13 @@
 # production
 /build
 
+# build artifacts (exclude from repo)
+/dist/
+src-tauri/target/
+*.dmg
+*.blockmap
+*.asar
+
 # misc
 .DS_Store
 *.pem

@@ -1,14 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true
-  },
+  eslint: { ignoreDuringBuilds: true },
   output: 'export',
   trailingSlash: true,
-  images: {
-    unoptimized: true
-  },
+  images: { unoptimized: true },
   serverExternalPackages: []
 };
 
