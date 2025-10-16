@@ -8,6 +8,14 @@ import { initDefaultSettings, getSettings, updateSettings } from '@/lib/actions/
 import { ensurePlanSessionForDay, getBoxesForDay } from '@/lib/actions/boxes';
 
 export default function SettingsPage() {
+  return (
+    <AppLayout>
+      <SettingsPageContent />
+    </AppLayout>
+  );
+}
+
+function SettingsPageContent() {
   const { selectedDate, formatForInput } = useDate();
 
   const [boxCount, setBoxCount] = useState(0);
@@ -73,7 +81,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <AppLayout>
+    <>
       <div>
       {toast ? (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 bg-purple-800 text-white text-xs rounded-full px-3 py-2 shadow">
@@ -199,7 +207,6 @@ export default function SettingsPage() {
           </div>
         </div>
       </div>
-      </div>
-    </AppLayout>
+    </>
   );
 }
