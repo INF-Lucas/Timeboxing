@@ -1,30 +1,28 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import AppLayout from './components/AppLayout';
 
 export default function Home() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // 添加延迟确保路由器准备就绪
-    const timer = setTimeout(() => {
-      router.replace('/plan');
-    }, 100);
-    
-    return () => clearTimeout(timer);
-  }, [router]);
-
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4"></div>
-        <p>正在跳转到计划页面...</p>
-        <div className="mt-4 text-sm text-gray-600">
-          <p>如果没有自动跳转，请点击：</p>
-          <a href="/plan" className="text-blue-600 hover:underline">进入计划页面</a>
+    <AppLayout>
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4">欢迎使用时间盒</h1>
+          <p className="text-gray-600 mb-8">高效的时间管理应用</p>
+          <div className="space-x-4">
+            <a 
+              href="/plan" 
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              开始计划
+            </a>
+            <a 
+              href="/focus" 
+              className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+            >
+              专注模式
+            </a>
+          </div>
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }
