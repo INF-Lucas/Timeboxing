@@ -7,6 +7,14 @@ import type { Box } from '@/lib/types';
 import { getBoxesForDay, markMissedForDay, shiftBox, deleteBox } from '@/lib/actions/boxes';
 
 export default function ReviewPage() {
+  return (
+    <AppLayout>
+      <ReviewPageContent />
+    </AppLayout>
+  );
+}
+
+function ReviewPageContent() {
   const { selectedDate, formatForInput } = useDate();
   const [boxes, setBoxes] = useState<Box[]>([]);
   const [busy, setBusy] = useState(false);
@@ -169,7 +177,7 @@ export default function ReviewPage() {
   }
 
   return (
-    <AppLayout>
+    <>
       <div>
         <h1 className="text-2xl font-semibold mb-2">Review 复盘</h1>
         <p className="text-sm text-gray-600">当前日期：{formatForInput(selectedDate)}</p>
@@ -311,7 +319,7 @@ export default function ReviewPage() {
         )}
       </div>
       </div>
-    </AppLayout>
+    </>
   );
 }
 

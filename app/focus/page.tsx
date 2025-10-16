@@ -18,6 +18,14 @@ import { hasOverlap } from '@/lib/utils/overlap';
 import { getSettings } from '@/lib/actions/settings';
 
 export default function FocusPage() {
+  return (
+    <AppLayout>
+      <FocusPageContent />
+    </AppLayout>
+  );
+}
+
+function FocusPageContent() {
   const { selectedDate, formatForInput } = useDate();
 
   const [boxes, setBoxes] = useState<Box[]>([]);
@@ -275,7 +283,7 @@ export default function FocusPage() {
   }, [activeBox, dueBox, nextPlanned, busy, shieldOnActive]);
 
   return (
-    <AppLayout>
+    <>
       <div>
       {toast ? (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 bg-purple-800 text-white text-xs rounded-full px-3 py-2 shadow">
@@ -400,6 +408,6 @@ export default function FocusPage() {
         </div>
       ) : null}
       </div>
-    </AppLayout>
+    </>
   );
 }

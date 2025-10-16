@@ -29,6 +29,14 @@ import { hasOverlap } from '@/lib/utils/overlap';
 import DayCalendar from '../components/DayCalendar';
 
 export default function PlanPage() {
+  return (
+    <AppLayout>
+      <PlanPageContent />
+    </AppLayout>
+  );
+}
+
+function PlanPageContent() {
   const { selectedDate, formatForInput } = useDate();
 
   const [backlog, setBacklog] = useState<BacklogItem[]>([]);
@@ -567,7 +575,7 @@ export default function PlanPage() {
   }, [actionRowId, editingBacklogId, backlog]);
 
   return (
-    <AppLayout>
+    <>
       <div className="flex flex-col h-full overflow-hidden">
         <h1 className="text-2xl font-semibold mb-2">Plan 计划</h1>
         <p className="text-sm text-gray-600">当前日期：{formatForInput(selectedDate)}</p>
@@ -1006,6 +1014,7 @@ export default function PlanPage() {
             ) : null}
         </div>
       </div>
-    </AppLayout>
+      </div>
+    </>
   );
 }
