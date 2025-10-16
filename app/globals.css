@@ -1,8 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 方案一：温和蓝灰系 + 深色渐变背景 */
+  --background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 25%, #7c3aed 50%, #be185d 75%, #dc2626 100%);
+  --foreground: #1e293b;
+  --card-background: #ffffff;
+  --capsule-background: #e2e8f0;
+  --capsule-background-hover: #cbd5e1;
+  --accent-color: #3b82f6;
+  --status-active: #10b981;
+  --status-done: #6b7280;
+  --status-planned: #f59e0b;
+  --status-urgent: #ef4444;
+  --border-color: #e2e8f0;
+  --shadow-light: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 @theme inline {
@@ -14,13 +26,127 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0f172a;
+    --foreground: #f1f5f9;
+    --card-background: #1e293b;
+    --capsule-background: #334155;
+    --capsule-background-hover: #475569;
+    --accent-color: #60a5fa;
+    --status-active: #34d399;
+    --status-done: #94a3b8;
+    --status-planned: #fbbf24;
+    --status-urgent: #f87171;
+    --border-color: #334155;
   }
+}
+
+* {
+  border-radius: 0 !important;
+}
+
+*:not(.capsule-ui *):not(.rounded-full):not(.rounded-2xl):not(.rounded-3xl):not([class*="rounded"]) {
+  border-radius: 0 !important;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  border-radius: 0 !important;
+  overflow: hidden;
+  -webkit-border-radius: 0 !important;
+}
+
+html {
+  border-radius: 0 !important;
+  overflow: hidden;
+  -webkit-border-radius: 0 !important;
+}
+
+@layer components {
+  /* 主内容区域统一胶囊风格 */
+  .capsule-ui button {
+    @apply rounded-full shadow-sm transition-all duration-200;
+    background: var(--capsule-background);
+    border: 1px solid var(--border-color);
+  }
+
+  .capsule-ui button:hover {
+    background: var(--capsule-background-hover);
+    box-shadow: var(--shadow-medium);
+  }
+
+  .capsule-ui input[type='text'],
+  .capsule-ui input[type='number'],
+  .capsule-ui input[type='time'],
+  .capsule-ui input[type='date'],
+  .capsule-ui select {
+    @apply rounded-full px-4 py-2 transition-all duration-200;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+  }
+
+  .capsule-ui input:focus,
+  .capsule-ui select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+  }
+
+  .capsule-ui textarea {
+    @apply rounded-2xl px-4 py-3 transition-all duration-200;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+  }
+
+  .capsule-ui textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgb(59 130 246 / 0.1);
+  }
+
+  /* 常见卡片容器（带边框且有圆角）统一升级为更大的圆角 */
+  .capsule-ui .border.rounded {
+    border-radius: 1rem; /* 16px，相当于 rounded-2xl 的效果 */
+    background: var(--card-background);
+    border-color: var(--border-color);
+    box-shadow: var(--shadow-light);
+  }
+
+  /* 状态指示器样式 */
+  .status-active {
+    background-color: var(--status-active);
+    color: white;
+  }
+
+  .status-done {
+    background-color: var(--status-done);
+    color: white;
+  }
+
+  .status-planned {
+    background-color: var(--status-planned);
+    color: white;
+  }
+
+  .status-urgent {
+    background-color: var(--status-urgent);
+    color: white;
+  }
+
+  /* 胶囊卡片样式 */
+  .capsule-card {
+    @apply rounded-2xl transition-all duration-200;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-light);
+  }
+
+  .capsule-card:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-1px);
+  }
 }
