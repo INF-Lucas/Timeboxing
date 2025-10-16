@@ -115,6 +115,10 @@ export default function DayCalendar({
   const interacting = !!resizing || !!moving;
   const [busy, setBusy] = useState(false);
 
+  // 长按拖拽状态
+  const [isDragReady, setIsDragReady] = useState(false);
+  const [dragTimer, setDragTimer] = useState<NodeJS.Timeout | null>(null);
+
   // 长按拖拽逻辑
   function handlePointerDown(box: Box, e: React.PointerEvent<HTMLDivElement>) {
     e.preventDefault();
@@ -128,7 +132,7 @@ export default function DayCalendar({
     setDragTimer(timer);
   }
 
-  function handlePointerUp() {
+  function handlePointerUpForDrag() {
     // 清除长按定时器
     if (dragTimer) {
       clearTimeout(dragTimer);
@@ -229,7 +233,7 @@ export default function DayCalendar({
   }
 
   // 禁用空白区域创建
-  function handlePointerDown(_e: React.PointerEvent<HTMLDivElement>) {
+  function handleEmptyAreaPointerDown(_e: React.PointerEvent<HTMLDivElement>) {
     return;
   }
 
@@ -286,7 +290,7 @@ export default function DayCalendar({
     setConflict(null);
   }
 
-  function handlePointerUp() {
+  function handleInteractionEnd() {
     // 移动完成 -> 检测冲突
     if (moving && draftStart && draftEnd) {
       if (hasConflict(draftStart, draftEnd, moving.id)) {
@@ -386,9 +390,9 @@ export default function DayCalendar({
       <div
         ref={containerRef}
         className="relative h-full overflow-y-auto overflow-x-hidden"
-        onPointerDown={handlePointerDown}
+        onPointerDown={handleEmptyAreaPointerDown}
         onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
+        onPointerUp={handleInteractionEnd}
       >
         {/* 交互遮罩层 */}
         {interacting && (
@@ -396,7 +400,7 @@ export default function DayCalendar({
             className="absolute inset-0 z-40"
             style={{ background: 'transparent' }}
             onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
+            onPointerUp={handleInteractionEnd}
           />
         )}
 

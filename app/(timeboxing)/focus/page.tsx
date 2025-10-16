@@ -105,12 +105,7 @@ export default function FocusPage() {
   async function handleSnooze(boxId: string) {
     setBusy(true);
     try {
-      const slot = await findNextFreeSlot(selectedDate, 30); // 默认延后30分钟
-      if (!slot) {
-        showToast('今日无可用空窗');
-        return;
-      }
-      await shiftBox(boxId, slot.start);
+      await shiftBox(boxId);
       await refreshBoxes();
       showToast('已延后到下一空窗');
     } finally {

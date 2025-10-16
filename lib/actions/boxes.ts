@@ -127,7 +127,7 @@ export async function getBoxesForDay(day: Date): Promise<Box[]> {
   const end = new Date(day);
   end.setHours(23, 59, 59, 999);
   const rows = await db.boxes.where('start').between(start, end, true, true).toArray();
-  return rows.sort((a, b) => a.start.getTime() - b.start.getTime());
+  return rows.sort((a: Box, b: Box) => a.start.getTime() - b.start.getTime());
 }
 
 // 计算下一空窗（简单版）：在工作日范围内，按已有盒子寻找不重叠区间
@@ -143,7 +143,7 @@ export async function findNextFreeSlot(
 
   const anchor = from && sameDay(from, day) ? (from > workStart ? from : workStart) : workStart;
   const rows = await getBoxesForDay(day);
-  const boxes = rows.filter((b) => !excludeBoxId || b.id !== excludeBoxId);
+  const boxes = rows.filter((b: Box) => !excludeBoxId || b.id !== excludeBoxId);
 
   let cursor = anchor;
   for (const b of boxes) {
@@ -272,7 +272,7 @@ export async function ensurePlanSessionForDay(day: Date): Promise<Box> {
     const existing = await db.boxes
       .where('start')
       .between(dayStart, dayEnd, true, true)
-      .filter((b) => b.is_plan_session === true)
+      .filter((b: Box) => b.is_plan_session === true)
       .first();
 
     if (existing) return existing;

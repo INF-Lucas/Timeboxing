@@ -19,4 +19,5 @@ class TimeboxingDB extends Dexie {
   }
 }
 
-export const db = new TimeboxingDB();
+// 只在浏览器环境中初始化数据库
+export const db = typeof window !== 'undefined' ? new TimeboxingDB() : null as any;
