@@ -1,5 +1,6 @@
 'use client';
 
+import AppLayout from '../components/AppLayout';
 import { useDate } from '../components/DateProvider';
 import { useEffect, useMemo, useState } from 'react';
 import type { Box, BacklogItem } from '@/lib/types';
@@ -566,9 +567,10 @@ export default function PlanPage() {
   }, [actionRowId, editingBacklogId, backlog]);
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
-      <h1 className="text-2xl font-semibold mb-2">Plan 计划</h1>
-      <p className="text-sm text-gray-600">当前日期：{formatForInput(selectedDate)}</p>
+    <AppLayout>
+      <div className="flex flex-col h-full overflow-hidden">
+        <h1 className="text-2xl font-semibold mb-2">Plan 计划</h1>
+        <p className="text-sm text-gray-600">当前日期：{formatForInput(selectedDate)}</p>
 
       {toast ? (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 bg-purple-800 text-white text-xs rounded-full px-3 py-2 shadow">
@@ -1004,6 +1006,6 @@ export default function PlanPage() {
             ) : null}
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

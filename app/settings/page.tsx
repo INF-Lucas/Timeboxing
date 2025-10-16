@@ -1,5 +1,6 @@
 'use client';
 
+import AppLayout from '../components/AppLayout';
 import { useDate } from '../components/DateProvider';
 import { useEffect, useState } from 'react';
 import type { Settings } from '@/lib/types';
@@ -72,7 +73,8 @@ export default function SettingsPage() {
   }
 
   return (
-    <div>
+    <AppLayout>
+      <div>
       {toast ? (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 bg-purple-800 text-white text-xs rounded-full px-3 py-2 shadow">
           {toast}
@@ -197,6 +199,7 @@ export default function SettingsPage() {
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </AppLayout>
   );
 }

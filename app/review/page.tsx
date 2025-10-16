@@ -1,5 +1,6 @@
 'use client';
 
+import AppLayout from '../components/AppLayout';
 import { useDate } from '../components/DateProvider';
 import { useEffect, useMemo, useState } from 'react';
 import type { Box } from '@/lib/types';
@@ -168,9 +169,10 @@ export default function ReviewPage() {
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-semibold mb-2">Review 复盘</h1>
-      <p className="text-sm text-gray-600">当前日期：{formatForInput(selectedDate)}</p>
+    <AppLayout>
+      <div>
+        <h1 className="text-2xl font-semibold mb-2">Review 复盘</h1>
+        <p className="text-sm text-gray-600">当前日期：{formatForInput(selectedDate)}</p>
       <div className="mt-2 flex gap-2">
         <button
           className="px-3 py-1 text-sm rounded-full bg-purple-800 text-white disabled:opacity-50"
@@ -308,7 +310,8 @@ export default function ReviewPage() {
           </ul>
         )}
       </div>
-    </div>
+      </div>
+    </AppLayout>
   );
 }
 
