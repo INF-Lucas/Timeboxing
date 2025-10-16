@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   output: 'export',
   trailingSlash: true,
   basePath: '/timeboxing-app',
-  assetPrefix: '/timeboxing-app/',
+  assetPrefix: '/timeboxing-app',
   images: {
     unoptimized: true
   },
