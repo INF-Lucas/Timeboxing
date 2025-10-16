@@ -4,8 +4,13 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
-  output: 'standalone',
-  trailingSlash: false,
+  output: 'export',
+  trailingSlash: true,
+  basePath: '/timeboxing-app',
+  assetPrefix: '/timeboxing-app/',
+  images: {
+    unoptimized: true
+  },
   experimental: {
     serverComponentsExternalPackages: []
   }
